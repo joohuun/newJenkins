@@ -10,6 +10,7 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     id 'application'
+    id 'com.google.cloud.tools.jib' version '3.3.1'
 }
 
 repositories {
@@ -35,4 +36,30 @@ testing {
 application {
     // Define the main class for the application.
     mainClass = 'com.test.App'
+}
+
+
+jib {
+    from {
+        image = 'adoptopenjdk/openjdk11:alpine-jre'
+    }
+    container {
+
+        mainClass = 'com.test.App'
+        jvmFlags = ['-Xms512m', '-Xmx512m', '-Xdebug', '-XshowSettings:vm', '-XX:+UnlockExperimentalVMOptions', '-XX:+UseContainerSupport']
+        ports = ['8080']
+
+        environment = [SPRING_OUTPUT_ANSI_ENABLED: "ALWAYS"]
+        labels = [version:project.version, name:project.name, group:project.group]
+
+        creationTime = 'USE_CURRENT_TIMESTAMP'
+        format = 'Docker'
+    }
+    extraDirectories {
+        paths {
+            path {
+                from = file('build/libs')
+            }
+        }
+    }
 }
