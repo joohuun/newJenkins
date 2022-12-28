@@ -1,4 +1,4 @@
-def mainDir="gradle"
+def mainDir=""
 def ecrLoginHelper="docker-credential-ecr-login"
 def region="ap-northeast-2"
 def ecrUrl="541062409049.dkr.ecr.ap-northeast-1.amazonaws.com/test"
@@ -17,7 +17,6 @@ pipeline {
         stage('Build Codes by Gradle') {
             steps {
                 sh """
-                cd ${mainDir}
                 ./gradlew clean build
                 """
             }
