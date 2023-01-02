@@ -3,7 +3,7 @@ def ecrLoginHelper="docker-credential-ecr-login"
 def region="ap-northeast-2"
 def ecrUrl="541062409049.dkr.ecr.ap-northeast-2.amazonaws.com"
 def repository="test"
-def deployHost="172.31.3.118"
+def deployHost="13.125.4.112"
 
 pipeline {
     agent any
