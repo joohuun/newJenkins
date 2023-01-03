@@ -10,12 +10,16 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     id 'application'
-    id 'com.google.cloud.tools.jib' version '3.3.1'
+    id 'com.google.cloud.tools.jib' version '3.3.3'
 }
 
 repositories {
     // Use Maven Central for resolving dependencies.
-    mavenCentral()
+    // mavenCentral()
+    maven {
+        url "http://3.39.232.169:8081/repository/test-docker-nexus-repo1/"
+        allowInsecureProtocol true
+    }
 }
 
 dependencies {
@@ -43,8 +47,11 @@ jib {
     from {
         image = 'adoptopenjdk/openjdk11:alpine-jre'
     }
+    to {
+        image = '541062409049.dkr.ecr.ap-northeast-2.amazonaws.com/test'
+        tags = ['1.0']
+    }
     container {
-
         mainClass = 'com.test.App'
         jvmFlags = ['-Xms512m', '-Xmx512m', '-Xdebug', '-XshowSettings:vm', '-XX:+UnlockExperimentalVMOptions', '-XX:+UseContainerSupport']
         ports = ['8080']

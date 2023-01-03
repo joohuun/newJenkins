@@ -5,7 +5,7 @@ def ecrUrl="541062409049.dkr.ecr.ap-northeast-2.amazonaws.com"
 def repository="test"
 def deployHost="172.31.9.147"
 // aws ecr get-login-password --region ${region} | sudo docker login --username AWS --password-stdin 541062409049.dkr.ecr.ap-northeast-2.amazonaws.com/test
-//ssh -o StrictHostKeyChecking=no ubuntu@172.31.3.118
+// ssh -o StrictHostKeyChecking=no ubuntu@172.31.9.147
 pipeline {
     agent any
 
